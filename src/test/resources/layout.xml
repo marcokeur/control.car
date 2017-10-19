@@ -1,0 +1,33 @@
+<?xml version = "1.0"?>
+<Database>
+    <Layout>
+        <BasicBlock id="2">
+            <Name>block2</Name>
+            <Length>130</Length>
+            <Next>3</Next>
+            <Prev>4</Prev>
+        </BasicBlock>
+        <BasicBlock id="4">
+            <Name>block4</Name>
+            <Length>110</Length>
+            <Next>2</Next>
+            <Prev>3</Prev>
+        </BasicBlock>
+        <BasicBlock id="3">
+            <Name>block3</Name>
+            <Length>800</Length>
+            <Next>4</Next>
+            <Prev>2</Prev>
+        </BasicBlock>
+        <BasicBlock id="6">
+        </BasicBlock>
+        <BasicBlock id="9">
+            <Name>BLOCK</Name>
+            <Length>10000</Length>
+        </BasicBlock>
+    </Layout>
+
+    <Vehicle>
+
+    </Vehicle>
+</Database>
