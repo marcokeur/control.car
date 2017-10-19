@@ -58,8 +58,8 @@ public class CarTest {
 
         assertEquals(b1, c.getCurrentBlock());
 
-        c.setSpeed(500);
-        Thread.sleep(3000);
+        c.setSpeed(12);
+        Thread.sleep(7000);
         c.updatePosition();
 
         assertEquals(b2, c.getCurrentBlock());
