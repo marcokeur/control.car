@@ -3,6 +3,7 @@ package nl.pit.control.car.layout.block.sax.handler;
 import nl.pit.control.car.layout.LayoutManager;
 import nl.pit.control.car.layout.block.BasicBlock;
 import nl.pit.control.car.layout.block.BlockFactory;
+import nl.pit.control.car.occupancy.DetectorManager;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -31,6 +32,9 @@ public class BasicBlockHandler extends DefaultHandler{
             bNext = true;
         } else if (qName.equalsIgnoreCase("prev")) {
             bPrev = true;
+        } else if (qName.equalsIgnoreCase("detector")) {
+            Integer detectorId = Integer.parseInt(attributes.getValue("id"));
+            DetectorManager.getInstance().listenToDetector(basicBlock, detectorId);
         }
     }
 

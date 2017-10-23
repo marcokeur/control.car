@@ -12,6 +12,7 @@ public class Detector {
     Integer id;
     Timestamp lastTrigger = null;
     List<DetectorListener> detectorListenerList = new ArrayList<>();
+    Integer address;
 
     public Detector(DetectorManager detectorManager, Integer id){
         this.detectorManager = detectorManager;
@@ -38,11 +39,23 @@ public class Detector {
         detectorListenerList.add(dl);
     }
 
-    public void removeListener(DetectorListener dl){
+    public void removeListener(DetectorListener dl) {
         detectorListenerList.remove(dl);
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public Integer getAddress() {
+        return address;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setAddress(int address) {
+        this.address = address;
     }
 }

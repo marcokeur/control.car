@@ -7,8 +7,34 @@ public class DetectorManager {
 
     List<Detector> detectorList = new ArrayList<>();
 
-    public void addDetector(Integer id){
-        Detector d = new Detector(this, id);
+    public volatile static DetectorManager detectorManager;
+
+    private DetectorManager(){
+
+    }
+
+    public static DetectorManager getInstance(){
+        if(detectorManager == null){
+            synchronized (DetectorManager.class){
+                if(detectorManager == null){
+                    detectorManager = new DetectorManager();
+                }
+            }
+        }
+
+        return detectorManager;
+    }
+
+    public void triggerDetector(Integer address){
+        for(Detector d : detectorList){
+            if(d.getAddress() == address){
+                d.trigger();
+                break;
+            }
+        }
+    }
+
+    public void addDetector(Detector d){
         detectorList.add(d);
     }
 
