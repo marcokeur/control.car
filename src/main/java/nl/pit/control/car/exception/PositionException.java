@@ -1,4 +1,4 @@
-package nl.pit.control.car;
+package nl.pit.control.car.exception;
 
 public class PositionException extends Exception{
     public PositionException(){}

@@ -1,11 +1,26 @@
 <?xml version = "1.0"?>
 <Database>
+    <Control>
+        <Interface>
+            <Name>SimulatedController</Name>
+            <Configuration>
+            </Configuration>
+        </Interface>
+    </Control>
+    <Occupancy>
+        <Detector id="1">
+            <Address>3</Address>
+        </Detector>
+    </Occupancy>
     <Layout>
         <BasicBlock id="2">
             <Name>block2</Name>
             <Length>130</Length>
             <Next>3</Next>
             <Prev>4</Prev>
+            <Detector id="1">
+                <Location>30</Location> <!-- 30mm vanaf begin blok -->
+            </Detector>
         </BasicBlock>
         <BasicBlock id="4">
             <Name>block4</Name>
@@ -27,7 +42,27 @@
         </BasicBlock>
     </Layout>
 
-    <Vehicle>
-
-    </Vehicle>
+    <Vehicles>
+        <Vehicle type="car">
+            <Address>3</Address>
+            <Length>100</Length>
+            <SpeedTable>
+                <Step index="0">0.0</Step>
+                <Step index="1">1.0</Step>
+                <Step index="2">2.0</Step>
+                <Step index="3">3.0</Step>
+                <Step index="4">4.0</Step>
+                <Step index="5">5.0</Step>
+                <Step index="6">6.0</Step>
+                <Step index="7">7.0</Step>
+                <Step index="8">8.4</Step>
+                <Step index="9">9.6</Step>
+                <Step index="10">10.1</Step>
+                <Step index="11">11</Step>
+                <Step index="12">40</Step>
+                <Step index="13">13.57</Step>
+                <Step index="14">14.9</Step>
+            </SpeedTable>
+        </Vehicle>
+    </Vehicles>
 </Database>

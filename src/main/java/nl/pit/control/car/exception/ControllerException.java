@@ -1,4 +1,4 @@
-package nl.pit.control.car;
+package nl.pit.control.car.exception;
 
 public class ControllerException extends Exception{
     public ControllerException(){}

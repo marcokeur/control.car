@@ -1,6 +1,6 @@
 package nl.pit.control.car.layout;
 
-import nl.pit.control.car.BlockException;
+import nl.pit.control.car.exception.BlockException;
 import nl.pit.control.car.layout.block.Block;
 
 import java.util.ArrayList;

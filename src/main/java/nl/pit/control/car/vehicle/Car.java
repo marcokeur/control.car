@@ -1,14 +1,20 @@
 package nl.pit.control.car.vehicle;
 
-import nl.pit.control.car.BlockException;
-import nl.pit.control.car.PositionException;
+import nl.pit.control.car.exception.BlockException;
+import nl.pit.control.car.exception.PositionException;
 import nl.pit.control.car.control.ControllerManager;
 import nl.pit.control.car.layout.block.Block;
 import nl.pit.control.car.layout.direction.Direction;
 import nl.pit.control.car.layout.direction.Position;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class Car implements Vehicle {
+
+    final static Logger logger = LogManager.getLogger(Car.class.getName());
+
 
     private Integer address = 3;
 
@@ -16,14 +22,16 @@ public class Car implements Vehicle {
     private Integer speed = 0;
 
     /* speedtable translates the speedstep to an actual speed in mm/s */
-    private Double[] speedTable = {10d, 20d, 30d, 40d, 50d, 60d, 70d, 80d,
-                                    90d, 100d, 110d, 120d, 130d, 140d};
+    private Double[] speedTable = new Double[15];
+
+    private Integer length = null;
 
     private Position currentPosition = new Position();
 
     public void updatePosition(){
         try {
-            currentPosition.updatePosition(speedTable[speed]);
+            Double distanceTraveled = currentPosition.updatePosition(speedTable[speed]);
+            logger.debug("Car traveled " + distanceTraveled + " since last updatePosition()");
         } catch (PositionException e) {
             e.printStackTrace();
         } catch (BlockException e) {
@@ -65,8 +73,22 @@ public class Car implements Vehicle {
     @Override
     public void setDistance(Double d) {
         currentPosition.distance = d;
+    }
 
-        //lastUpdate = getNow();
+    @Override
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
+    @Override
+    public void setAddress(Integer address) {
+        this.address = address;
+    }
+
+    @Override
+    public void addSpeedStep(Integer index, Double speed) {
+        logger.debug("Speedstep {} added, speed is {} mm/s.", index, speed);
+        speedTable[index] = speed;
     }
 
     public Block getCurrentBlock() {

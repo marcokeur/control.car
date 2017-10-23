@@ -1,15 +1,20 @@
 package nl.pit.control.car.layout.direction;
 
-import nl.pit.control.car.BlockException;
-import nl.pit.control.car.PositionException;
+import nl.pit.control.car.exception.BlockException;
+import nl.pit.control.car.exception.PositionException;
 import nl.pit.control.car.layout.LayoutManager;
 import nl.pit.control.car.layout.block.Block;
+import nl.pit.control.car.vehicle.Car;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Position {
+    final static Logger logger = LogManager.getLogger(Position.class.getName());
+
     public Direction direction;
     public Double distance;
     public Block currentBlock;
@@ -18,6 +23,8 @@ public class Position {
 
     public Position(){
         lastUpdate = getNow();
+        direction = Direction.NEXT;
+        distance = 0d;
     }
 
     private Timestamp getNow() {
@@ -30,6 +37,10 @@ public class Position {
     public Double updatePosition(Double speed) throws PositionException, BlockException {
         Timestamp now = getNow();
 
+        if(speed == null){
+            throw new PositionException("Illegal speed: " + speed);
+        }
+
         /* Get the time difference since last update in ms */
         long timeDiff = now.getTime() - lastUpdate.getTime();
         /* Convert to seconds */
@@ -40,6 +51,10 @@ public class Position {
         distance += distanceTraveled;
         /* Update the last update time to "now" */
         lastUpdate = now;
+
+        if(currentBlock == null){
+            throw new PositionException("Current block unknown");
+        }
 
         /* Check if we are out of bounds of currentBlock */
         if(distance > currentBlock.getLength()){
@@ -57,6 +72,8 @@ public class Position {
 
             /* store the new distance */
             distance = distanceTraveledInNewBlock;
+
+            logger.debug("Travaled " + distanceTraveledInNewBlock + "mm in the " + direction + " block " + currentBlock.getName() + "");
         }
 
         return distanceTraveled;

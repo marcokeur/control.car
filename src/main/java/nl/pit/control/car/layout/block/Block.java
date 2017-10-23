@@ -1,6 +1,8 @@
 package nl.pit.control.car.layout.block;
 
-public interface Block {
+import nl.pit.control.car.occupancy.DetectorListener;
+
+public interface Block extends DetectorListener {
 
     Integer getId();
     void setId(Integer id);

@@ -1,5 +1,7 @@
 package nl.pit.control.car.layout.block;
 
+import nl.pit.control.car.occupancy.Detector;
+
 public class BasicBlock implements Block {
     Integer id = null;
     String name = null;
@@ -53,34 +55,9 @@ public class BasicBlock implements Block {
     public Integer getNextId() {
         return nextId;
     }
-/*
-    Block next = null;
-    Block prev = null;
 
-    public Block getNext() {
-        return next;
+    @Override
+    public void detectorWasTriggered(Detector detector) {
+
     }
-
-    public void setNext(Block b) {
-        this.next = b;
-
-        // if "b" is next, means we are b->prev
-        if(b.getPrev() != this) {
-            b.setPrev(this);
-        }
-    }
-
-    public Block getPrev() {
-        return prev;
-    }
-
-    public void setPrev(Block b) {
-        this.prev = b;
-
-        // if "b" is prev, means we are b->next
-        if(b.getNext() != this){
-            b.setNext(this);
-        }
-    }
-*/
 }
